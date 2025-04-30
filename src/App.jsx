@@ -22,21 +22,35 @@ import './App.css'
 ]
 
 function App() {
-
   
+  const [alltodos, setalltodos] = useState(initialTodo)
 
+  const [newTask, setNewTask] = useState("")
+  
+  function submitNewTodo(e){
+    e.preventDefault ()
+    console.log('pushing')
 
+    let newtodos= alltodos.concat(  { 
+      id: 4,
+      task:"Go to shop", 
+      completed: true
+    })
+  
+    setalltodos(newtodos)
+  }
+  
   return (
     <>
     <h1>Todo App</h1>
     <ul>
-      {initialTodo.map(todo => (
+      {alltodos.map(todo => (
         <li>{todo.task}</li>
       ))}
     </ul>
 
-  <form>
-    <input type= "text"></input>
+  <form onSubmit={submitNewTodo}>
+    <input type= "text" value= {newTask} onChange={e => setNewTask(e.target.value)}></input>
     <button type= "submit">submit</button>
   </form>
     </>
